@@ -35,9 +35,11 @@ from google.adk.tools.agent_tool import AgentTool
 from google.genai import types
 
 # The ADK scaffold put the key here. Nothing secret lives in this file.
-load_dotenv(Path(__file__).parent / "my_agent" / ".env")
+load_dotenv(Path(__file__).parent / ".env")
 
-MODEL = os.getenv("MODEL", "gemini-2.5-flash")
+# The whole gemini-2.5 family now 404s for keys created recently
+# ("no longer available to new users"), so the lite tier of 3.5 is the floor.
+MODEL = os.getenv("MODEL", "gemini-3.5-flash-lite")
 APP_NAME = "research_team"
 OPENALEX = "https://api.openalex.org/works"
 
