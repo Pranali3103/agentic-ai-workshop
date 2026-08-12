@@ -1,0 +1,13 @@
+# Secrets - never commit an API key
+.env
+*.env
+
+# Virtual environment
+.venv/
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# ADK local session database
+.adk/
