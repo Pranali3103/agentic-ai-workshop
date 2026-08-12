@@ -126,10 +126,3 @@ root_agent = LlmAgent(
     ),
     tools=[read_resume],
 )
-
-
-# Checks the PDF parsing with no model call.
-if __name__ == "__main__":
-    sample = ROOT / "data" / "resume_sample.pdf"
-    text = extract_text(sample.read_bytes(), sample.name)
-    print(f"{len(text)} chars | {text[:150]}...")

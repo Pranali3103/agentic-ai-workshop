@@ -139,6 +139,50 @@ difference is the definition of "agentic".
 
 To be added.
 
+## Prompts to type
+
+Sections 2 to 6 all answer the same request, so the improvement is never about a cleverer
+prompt. Keep the wording identical as you move along.
+
+**Section 1** - one it can do, then one it cannot:
+
+    What is an AI agent, in three sentences?
+
+    Which companies are hiring Python developers in Pune this week?
+
+The second answer is either a refusal or confident invention. Either way it makes the
+point: no tools, no facts.
+
+**Sections 2 and 3** - paste the resume text first, then on a new line:
+
+    Review my resume. I am targeting python developer roles in Pune.
+
+Run it in Section 2, run the identical prompt in Section 3, and put the two replies side
+by side. Same model, same question, different instruction.
+
+**Sections 4, 5 and 6** - no pasting now, the tool reads the file:
+
+    My resume is at data/resume_sample.pdf. I am targeting python developer roles in Pune.
+
+Or attach a PDF with the paperclip and say:
+
+    Review my resume for python developer roles in Pune.
+
+Useful follow-ups, in any of the tool sections:
+
+    What projects can I build? I have about a month.
+
+    Give me the exact links to apply.
+
+The second one is the interesting one. In Section 4 it has no search, so a well-behaved
+answer names platforms and admits it cannot verify links. In Section 5 it returns real
+URLs that came back from a search. Ask it in both and compare - that contrast is the whole
+argument for tools.
+
+To show the anti-fabrication rules working, push back on it:
+
+    Are you certain those links work? Which of them did you actually retrieve?
+
 ## Notes
 
 - The model is pinned to `gemini-3.5-flash-lite` everywhere. Section 1 hardcodes it
@@ -151,4 +195,5 @@ To be added.
 - A 429 `RESOURCE_EXHAUSTED` is either the per-minute limit, which clears in a minute, or
   the per-day limit, which clears at midnight Pacific. Check which at
   https://ai.dev/rate-limit
-- Test the resume tool without spending any quota: `python section4_one_tool/agent.py`
+- If a resume comes back empty, the PDF is a scan with no text layer in it. Check with
+  `python -c "from pypdf import PdfReader; print(PdfReader('data/resume_sample.pdf').pages[0].extract_text()[:200])"`
