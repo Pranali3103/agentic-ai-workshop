@@ -6,10 +6,7 @@ from google.adk.agents import LlmAgent
 
 MODEL = os.getenv("MODEL", "gemini-3.5-flash-lite")
 
-# The whole agent is fine. The instruction is the problem, and that is the point.
-# Give it a resume and watch what comes back: praise, generic advice that would fit any
-# student, "learn DSA and build projects", and no idea what it is actually looking at.
-# Section 3 changes nothing except these words.
+# Section 3 is this same agent with a longer instruction. Nothing else changes.
 root_agent = LlmAgent(
     name="career_mentor",
     model=MODEL,

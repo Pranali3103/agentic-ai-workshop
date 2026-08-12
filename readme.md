@@ -76,22 +76,33 @@ open a single link to check itself. So it is told not to write URLs it is unsure
 
 Sample resume: [data/resume_sample.pdf](data/resume_sample.pdf) - open it, copy the text.
 
+You can also attach the PDF with the paperclip instead of pasting. That works here with no
+code at all, because Gemini reads PDFs natively as part of the message. It is worth
+showing: not everything needs a tool.
+
 ## Section 4 - the first tool
 
 `section4_one_tool` - one tool, `read_resume`. No more pasting.
 
-A tool is a plain Python function. Read its docstring: that text is not a comment, it is
-what the model reads to decide when to call the function and what to pass it. Tool
-docstrings are prompt engineering.
+A tool is a plain Python function - about fifteen lines here. Read its docstring: that
+text is not a comment, it is what the model reads to decide when to call the function and
+what to pass it. Tool docstrings are prompt engineering.
 
     My resume is at data/resume_sample.pdf. I am targeting python developer roles in Pune.
 
-Notice what the tool does *not* do. Deterministic work - finding a file, parsing a PDF,
-detecting a scan with no text - belongs in Python, not in the model. The tool also
-returns its errors as data instead of raising, so the agent can tell the user what broke.
+Students can also attach their own resume with the paperclip and say "review my resume".
+An attached file never lands on disk - ADK stores it as an artifact - so the tool takes a
+`tool_context` parameter and calls `load_artifact` first, falling back to the filesystem.
+ADK fills that parameter in itself and hides it from the model, which only ever sees
+`filename`.
 
-Still half broken: it reads the real resume now, but it still cannot check one claim
-about the job market.
+Two more things to point out. Deterministic work - finding the file, parsing the PDF,
+noticing a scan with no text in it - belongs in Python, not in the model. And the function
+returns its errors as data rather than raising, so the agent can tell the student what
+broke.
+
+Still half broken: it reads the real resume now, but it cannot check one claim about the
+job market.
 
 ## Section 5 - web search
 
@@ -140,5 +151,4 @@ To be added.
 - A 429 `RESOURCE_EXHAUSTED` is either the per-minute limit, which clears in a minute, or
   the per-day limit, which clears at midnight Pacific. Check which at
   https://ai.dev/rate-limit
-- Test the tools without spending any quota at all:
-  `python section4_one_tool/agent.py` and `python section6_multi_agent/agent.py`
+- Test the resume tool without spending any quota: `python section4_one_tool/agent.py`
