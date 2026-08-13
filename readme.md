@@ -1,5 +1,3 @@
-
-
 # Agentic AI Workshop
 
 - google adk: Online documentation link: https://adk.dev/get-started/python/
@@ -58,7 +56,8 @@ agent is a model, a name, a description and an instruction. Nothing else.
 No tools, so it can only answer from what the model already knows. Ask it something
 current, like today's news or whether a link works, and watch what happens.
 
-Demo of this section: https://github.com/user-attachments/assets/e2cc7504-11ad-4cec-860e-f4ca7d4fc5dc 
+Demo of this section: https://github.com/user-attachments/assets/e2cc7504-11ad-4cec-860e-f4ca7d4fc5dc
+
 ## Section 2 - no role, no rules
 
 `section2_no_rules` - the career mentor task, with a one-line instruction:
@@ -212,3 +211,8 @@ To show the anti-fabrication rules working, push back on it:
   `python -c "from pypdf import PdfReader; print(PdfReader('data/resume_sample.pdf').pages[0].extract_text()[:200])"`
 
 some session id: http://127.0.0.1:8000/dev-ui/?app=section6_multi_agent&session=d1ffea01-7a93-4d6f-9c3e-505313460522&userId=user
+
+section1:http://127.0.0.1:8000/dev-ui/?app=section1_basic_agent&session=83e20004-cfc4-4621-8fdc-ffa0c8513565&userId=user
+
+section2:
+http://127.0.0.1:8000/dev-ui/?app=section2_no_rules&session=b001789f-e912-407a-bb2c-18c31880040c&userId=user
