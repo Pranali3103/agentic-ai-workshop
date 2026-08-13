@@ -58,7 +58,7 @@ agent is a model, a name, a description and an instruction. Nothing else.
 No tools, so it can only answer from what the model already knows. Ask it something
 current, like today's news or whether a link works, and watch what happens.
 
-Demo of this section: https://github.com/user-attachments/assets/e2cc7504-11ad-4cec-860e-f4ca7d4fc5dc
+Demo of this section: https://github.com/user-attachments/assets/e2cc7504-11ad-4cec-860e-f4ca7d4fc5dc 
 ## Section 2 - no role, no rules
 
 `section2_no_rules` - the career mentor task, with a one-line instruction:
