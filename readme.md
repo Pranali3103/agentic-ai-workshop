@@ -1,3 +1,7 @@
+
+
+https://github.com/user-attachments/assets/e2cc7504-11ad-4cec-860e-f4ca7d4fc5dc
+
 # Agentic AI Workshop
 
 - google adk: Online documentation link: https://adk.dev/get-started/python/
