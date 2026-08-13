@@ -14,6 +14,30 @@ Commands I have ran to setup:
 ADK looks for a `.env` starting at the agent folder and walks up to the drive root, so
 one file at the repo root covers all sections. It is in `.gitignore` and never commits.
 
+## The API key
+
+Get a key at https://aistudio.google.com/apikey, then put exactly two lines in the `.env`
+at the repo root:
+
+    GOOGLE_API_KEY=your-key-here
+    GOOGLE_GENAI_USE_VERTEXAI=FALSE
+
+That is all any section needs. No `load_dotenv` call and no `genai.configure` line in the
+agent code - ADK loads the file, and the SDK picks the key up from the environment.
+
+Details worth knowing when a student's key does not work:
+
+- `GEMINI_API_KEY` works too. If both are set, `GOOGLE_API_KEY` wins and the SDK logs a
+  warning, so set one.
+- `GOOGLE_GENAI_USE_VERTEXAI=FALSE` selects AI Studio key mode. Set it to `TRUE` only for
+  Vertex AI, which needs `GOOGLE_CLOUD_PROJECT` and `GOOGLE_CLOUD_LOCATION` and a gcloud
+  login instead of a key. Workshop keys are AI Studio keys.
+- A real environment variable beats the `.env` value. If a student exported
+  `GOOGLE_API_KEY` in their shell once, editing `.env` changes nothing until they open a
+  new terminal.
+- Keys are per-account, and free-tier quota is per-key. Two students sharing one key share
+  its limits.
+
 ## Running any section
 
 Start the web UI from the repo root, then pick the section from the dropdown:
@@ -29,14 +53,14 @@ Or run one directly in the terminal:
 Each section changes exactly one thing from the section before it. That is the whole
 teaching design - so when the output improves, there is no doubt about what caused it.
 
-| Section | What changes | Tools |
-|---|---|---|
-| 1 | nothing yet - the raw scaffold | 0 |
-| 2 | give it a real job, with a vague instruction | 0 |
-| 3 | add the role and the rules | 0 |
-| 4 | add one tool | 1 |
-| 5 | add web search | 2 |
-| 6 | split one agent into three | 2, across agents |
+| Section | What changes                                 | Tools            |
+| ------- | -------------------------------------------- | ---------------- |
+| 1       | nothing yet - the raw scaffold               | 0                |
+| 2       | give it a real job, with a vague instruction | 0                |
+| 3       | add the role and the rules                   | 0                |
+| 4       | add one tool                                 | 1                |
+| 5       | add web search                               | 2                |
+| 6       | split one agent into three                   | 2, across agents |
 
 ## Section 1 - a basic agent
 
@@ -49,7 +73,7 @@ current, like today's news or whether a link works, and watch what happens.
 ## Section 2 - no role, no rules
 
 `section2_no_rules` - the career mentor task, with a one-line instruction:
-*"You are a career mentor. Help the student with their career."*
+_"You are a career mentor. Help the student with their career."_
 
 Paste in a resume and ask for a review. What comes back is the failure mode students
 need to see: praise, advice that would fit literally any student, "learn DSA and build
@@ -63,7 +87,7 @@ Nothing here is broken. The model is fine, the code is fine. The instruction is 
 the words in the instruction changed.
 
 Now it produces seven fixed sections: a resume review that quotes the weak line and puts
-the rewrite beside it, a skill audit that separates *evidenced* from *claimed only*, must
+the rewrite beside it, a skill audit that separates _evidenced_ from _claimed only_, must
 learn ordered by what unblocks an interview soonest, **safe to skip for now** with a
 condition for revisiting, resources with what to actually do with them, where to apply
 with the exact search strings, and profile upgrades plus the habits that produce real
@@ -185,9 +209,9 @@ To show the anti-fabrication rules working, push back on it:
 
 ## Notes
 
-- The model is pinned to `gemini-3.5-flash-lite` everywhere. Section 1 hardcodes it
-  because it is the untouched scaffold; the rest read a `MODEL` variable, so you can swap
-  without editing code: `MODEL=gemini-2.5-flash-lite adk web`
+- The model is pinned to `gemini-2.5-flash` everywhere. Section 1 hardcodes it because it
+  is the untouched scaffold; the rest read a `MODEL` variable, so you can swap without
+  editing code: `MODEL=gemini-2.5-flash-lite adk web`
 - Free-tier quota is the real constraint, and it gets worse as the sections progress -
   roughly 1 request for sections 1 to 3, 3 for section 4, 5 for section 5, and 7 for
   section 6, since every sub-agent is its own request. Sections 5 and 6 are capped at one
@@ -197,3 +221,5 @@ To show the anti-fabrication rules working, push back on it:
   https://ai.dev/rate-limit
 - If a resume comes back empty, the PDF is a scan with no text layer in it. Check with
   `python -c "from pypdf import PdfReader; print(PdfReader('data/resume_sample.pdf').pages[0].extract_text()[:200])"`
+
+some session id: http://127.0.0.1:8000/dev-ui/?app=section6_multi_agent&session=d1ffea01-7a93-4d6f-9c3e-505313460522&userId=user
