@@ -1,7 +1,5 @@
 
 
-https://github.com/user-attachments/assets/e2cc7504-11ad-4cec-860e-f4ca7d4fc5dc
-
 # Agentic AI Workshop
 
 - google adk: Online documentation link: https://adk.dev/get-started/python/
@@ -52,20 +50,6 @@ Or run one directly in the terminal:
 
     adk run section1_basic_agent
 
-## The arc
-
-Each section changes exactly one thing from the section before it. That is the whole
-teaching design - so when the output improves, there is no doubt about what caused it.
-
-| Section | What changes                                 | Tools            |
-| ------- | -------------------------------------------- | ---------------- |
-| 1       | nothing yet - the raw scaffold               | 0                |
-| 2       | give it a real job, with a vague instruction | 0                |
-| 3       | add the role and the rules                   | 0                |
-| 4       | add one tool                                 | 1                |
-| 5       | add web search                               | 2                |
-| 6       | split one agent into three                   | 2, across agents |
-
 ## Section 1 - a basic agent
 
 `section1_basic_agent` - exactly what `adk create` generates, untouched. Eight lines: an
@@ -74,9 +58,7 @@ agent is a model, a name, a description and an instruction. Nothing else.
 No tools, so it can only answer from what the model already knows. Ask it something
 current, like today's news or whether a link works, and watch what happens.
 
-Recording of this section running: [section1-demo.mp4](section1-demo.mp4) - click it on
-GitHub and it plays in the file view.
-
+Demo of this section: https://github.com/user-attachments/assets/e2cc7504-11ad-4cec-860e-f4ca7d4fc5dc
 ## Section 2 - no role, no rules
 
 `section2_no_rules` - the career mentor task, with a one-line instruction:
