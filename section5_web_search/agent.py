@@ -10,7 +10,7 @@ from google.adk.tools.agent_tool import AgentTool
 
 ROOT = Path(__file__).resolve().parent.parent
 
-MODEL = os.getenv("MODEL", "gemini-3.5-flash-lite")
+MODEL = os.getenv("MODEL", "gemini-2.5-flash")
 
 
 def extract_text(data: bytes, filename: str) -> str:

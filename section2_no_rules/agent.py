@@ -4,7 +4,7 @@ import os
 
 from google.adk.agents import LlmAgent
 
-MODEL = os.getenv("MODEL", "gemini-3.5-flash-lite")
+MODEL = os.getenv("MODEL", "gemini-2.5-flash")
 
 # Section 3 is this same agent with a longer instruction. Nothing else changes.
 root_agent = LlmAgent(
